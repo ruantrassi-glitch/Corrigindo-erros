@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<title>Cadastro de Usuário</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 40px;
+}
+label {
+display: block;
+margin-top: 10px;
+}
+input {
+width: 100%;
+max-width: 300px;
+padding: 6px;
+border: 1px solid #ccc;
+}
+button {
+margin-top: 12px;
+padding: 6px 10px;
+cursor: pointer;
+}
+button:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+#forca-senh {
+margin-top: 6px;
+}
+</style>
+</head>
+<body>
+<div class="container-formulario">
+<h1>Cadastro de Usuário</h1>
+<form id="formulario-cadastro">
+<label for="nom">Nome</label>
+<input
+type="text"
+id="nome"
+name="nome"
+placeholder="Digite seu nome"
+required/>
+<label for="email">Email</label>
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Digite seu email"
+required
+/>
+<label for="senha">Senha</label>
+<input
+type="password"
+id="senha"
+name="senha"
+placeholder="Digite sua senha"
+required
+/>
+<div id="forca-senha">Força da senha:</div>
+<button type="subimt" id="botao-cadastrar" disabled>
+Cadastrar
+
+</button>
+</form>
+</div>
+<script>
+const formularioCadastro = document.getElementById(
+"formulario-cadastro",
+);
+const campoSenha = document.getElementById("senha");
+const textoForca = document.getElementById("forca-senha");
+const botaoCadastrar = document.getElementById("botao-cadastrar");
+
+formularioCadastro.addEventListener("submit", function (evento) {
+evento.preventDefault();
+alert("Cadastro realizado com sucesso!");
+});
+campoSenha.addEventListener("input", function () {
+const tamanho = campoSenha.value.length;
+let forca = "";
+if (tamanho === 0) {
+forca = "";
+} else if (tamanho <= 5) {
+forca = "Fraca";
+} else if (tamanho >= 8) {
+forca = "Forte";
+} else {
+forca = "Média";
+}
+textoForca.textContent = "Força da senha: " + forca;
+botaoCadastrar.disabled = forca != "Forte";
+});
+</script>
+</body>
+</html>
